@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <title>Asset Finder</title>
+    <link rel="stylesheet" href="style.css">
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+</head>
+
+<body>
+    <div class="header-bar">
+        <div class="header-inner">
+            <div class="header-left">
+                <div class="logo-title" id="titleText"></div>
+            </div>
+            <div class="header-right">
+                <div class="header-actions" role="toolbar" aria-label="Top actions">
+                    <button class="help-btn" id="helpBtn" title="Help" aria-label="Help">
+                        <i class="fa-solid fa-circle-question" aria-hidden="true"></i>
+                    </button>
+                    <button class="lang-switch-btn" id="langSwitch" onclick="switchLang()" title="Switch language" aria-label="Switch language">
+                        <i class="fa-solid fa-language" aria-hidden="true"></i>
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="global-progress" id="progressWrap"><div id="progressFill"></div></div>
+    <div class="main-container">
+        <div class="card full-width">
+            <div class="section-title">
+                <span id="filterTitle"></span>
+                <div>
+                    <span id="allBtn" style="cursor:pointer;" onclick="toggleAll()"></span>
+                </div>
+            </div>
+            <div class="format-container" id="extFilters"></div>
+            <div class="section-title" id="searchLogicTitle"></div>
+            <div style="display: flex; gap: 10px; margin-bottom: 20px;">
+                <label class="mode-item"><input type="checkbox" class="logic-chk" value="exact"></label>
+                <label class="mode-item"><input type="checkbox" class="logic-chk" value="prefix"></label>
+                <label class="mode-item"><input type="checkbox" class="logic-chk" value="suffix"></label>
+                <label class="mode-item"><input type="checkbox" class="logic-chk" value="fuzzy"></label>
+                <label class="mode-item" id="caseLabel"><input type="checkbox" id="caseSensitive"></label>
+                <label class="mode-item" id="ignoreLabel"><input type="checkbox" id="ignoreSpaces"></label>
+            </div>
+            <div class="file-upload" id="dropZone" onclick="document.getElementById('dirInput').click()">
+                <strong id="loadStatus"></strong>
+                <input type="file" id="dirInput" webkitdirectory directory multiple style="display:none" onchange="handleImport(this)">
+            </div>
+        </div>
+        <div class="card">
+            <div class="section-title" id="inputTitle"></div>
+            <div class="editor-row">
+                <div class="code-wrapper">
+                    <div class="gutter" id="inputGutter"></div>
+                    <textarea id="inputText" wrap="off" placeholder="Example:&#10;Hero_Knight Assets/Characters&#10;Stone_A Assets/Environment/Rocks"></textarea>
+                </div>
+                <button class="btn-run" id="runBtn" onclick="handleSearch()" disabled></button>
+            </div>
+        </div>
+        <div class="card">
+            <div class="section-title" id="outputTitle"></div>
+            <div class="editor-row">
+                <div class="code-wrapper">
+                    <div class="gutter" id="outputGutter"></div>
+                    <textarea id="outputText" wrap="off" readonly></textarea>
+                </div>
+                <button class="btn-dl" id="dlBtn" onclick="download()" disabled></button>
+            </div>
+            <div class="status-bar">
+                <span id="outputInfo"></span>
+            </div>
+        </div>
+    </div>
+    <div class="help-modal-backdrop" id="helpModalBackdrop" role="dialog" aria-modal="true" aria-hidden="true">
+        <div class="help-modal" role="document" tabindex="-1">
+            <div class="modal-body" id="helpModalBody"></div>
+        </div>
+    </div>
+
+    <script src="lang.js"></script>
+    <script src="main.js"></script>
+</body>
