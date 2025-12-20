@@ -53,7 +53,3 @@ Tip: turn on **Ignore Spaces** to improve matching when filenames contain/omit s
 ## 5) Troubleshooting
 - If results are empty: ensure you selected at least one format or clicked **Select All**.
 - If help content (Markdown) doesn't load when opening the HTML directly: some browsers block fetch from `file://`. Run a simple local server (`python -m http.server`) and open `http://localhost:8000` to enable local file loading.
-
----
-
-If you'd like, I can add screenshots or GIFs to this Markdown, enable advanced match options (regex), or implement a cancel-search button — tell me which enhancement you prefer.
