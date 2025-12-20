@@ -1,4 +1,4 @@
-# Asset Finder — Full Usage Guide (Step-by-step)
+# Asset Finder — Full Usage Guide
 
 ## Overview
 Asset Finder uses a **smart search** core (tolerant matching, ignore-spaces, keyword/fuzzy modes, and preferring the deepest directory when multiple candidates exist). It can handle anywhere from tens of thousands to millions of files, but the **actual capacity depends on available browser memory, file metadata size and system limits**. To remain responsive, indexing and searching use chunked processing; filtering by extensions reduces the scanned set and improves performance.
