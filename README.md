@@ -2,7 +2,7 @@
 [![License](https://img.shields.io/badge/license-Apache%202.0-blue.svg)](LICENSE)
 
 **简短说明**  
-Asset Finder 是一个轻量的前端工具，用于在本地项目目录中快速查找资源文件，支持大规模文件索引、格式筛选、多语言帮助与导出功能。
+Asset Finder 是一个轻量的前端工具，用于在本地项目目录中快速查找资源文件，支持大规模文件索引、格式筛选、多语言帮助与导出搜索结果功能。
 
 ---
 
@@ -15,19 +15,16 @@ Asset Finder 是一个轻量的前端工具，用于在本地项目目录中快�
 
 ---
 
-## 演示 🌐
-如果你已部署到 GitHub Pages，可在你的 Pages URL 查看在线演示（本仓库包含 `.github/workflows/gh-pages.yml` 示例工作流）。
+## 演示与在线使用 🌐
+- **在线使用（推荐）**：你可以直接访问在线演示并使用工具：
+  https://cloud-oc.github.io/AssetFinderWeb/
+  在该页面，你可以点击顶部的 **导入（📂）** 并手动选择本地项目文件夹来进行索引；导入过程需要你在浏览器中通过选择文件夹来授予访问权限，浏览器不会自动访问你的文件系统。
+  帮助文档（`help_zh.md` / `help_en.md`）也会在托管页面中正常加载。
 
----
-
-## 快速开始 🚀
-1. 克隆仓库：
+- **本地运行（可选）**：如果你想在本地开发或调试，请克隆仓库并使用静态服务器：
 ```bash
 git clone <your-repo-url>
 cd Asset-Finder
-```
-2. 直接用浏览器打开 `index.html`，或使用本地静态服务器（推荐）以避免 fetch 限制：
-```bash
 python -m http.server 8000
 # 或
 npx http-server -c-1
@@ -80,8 +77,4 @@ Stone_A Assets/Environment/Rocks
 ---
 
 ## 许可证 📜
-本项目采用 **Apache License 2.0** 许可（详见 `LICENSE` 文件）。
-
----
-
-如需我把这些更改提交为一次 Git commit（包括添加 `LICENSE` 与更新 `README.md`），我可以为你执行提交并推送到远程（需要你的确认）。
+本项目采用 **Apache License 2.0** 。
