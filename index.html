@@ -5,7 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>Asset Finder Web</title>
     <link rel="stylesheet" href="style.css">
-    <!-- Font Awesome -->
+    <!-- 引入 Font Awesome 图标库 -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
 </head>
 
@@ -30,26 +30,39 @@
     <div class="global-progress" id="progressWrap"><div id="progressFill"></div></div>
     <div class="main-container">
         <div class="card full-width">
-            <div class="section-title">
-                <span id="filterTitle"></span>
-                <div>
-                    <span id="allBtn" style="cursor:pointer;" onclick="toggleAll()"></span>
-                </div>
-            </div>
-            <div class="format-container" id="extFilters"></div>
-            <div class="section-title" id="searchLogicTitle"></div>
-            <div style="display: flex; gap: 10px; margin-bottom: 20px;">
-                <label class="mode-item"><input type="checkbox" class="logic-chk" value="exact"></label>
-                <label class="mode-item"><input type="checkbox" class="logic-chk" value="prefix"></label>
-                <label class="mode-item"><input type="checkbox" class="logic-chk" value="suffix"></label>
-                <label class="mode-item"><input type="checkbox" class="logic-chk" value="fuzzy"></label>
-                <label class="mode-item" id="caseLabel"><input type="checkbox" id="caseSensitive"></label>
-                <label class="mode-item" id="ignoreLabel"><input type="checkbox" id="ignoreSpaces"></label>
-            </div>
-            <div class="file-upload" id="dropZone" onclick="document.getElementById('dirInput').click()">
-                <strong id="loadStatus"></strong>
+
+            <!-- 选择行：包含选择文件夹按钮和格式筛选按钮 -->
+            <div class="choose-row">
+                <button id="chooseDirBtn" class="btn-choose small" type="button" aria-live="polite">
+                    <i class="fa-solid fa-folder-open" aria-hidden="true"></i>
+                    <span class="choose-label">选择资产文件夹</span>
+                    <span class="choose-status" aria-live="polite" role="status" aria-atomic="true"></span>
+                    <span class="choose-progress" aria-hidden="true"><span class="choose-progress-fill"></span></span>
+                </button>
+                <button id="openFormatBtn" class="btn-format" type="button">文件格式筛选</button>
                 <input type="file" id="dirInput" webkitdirectory directory multiple style="display:none" onchange="handleImport(this)">
             </div>
+
+            <!-- 搜索逻辑标题显示在下方 -->
+            <div class="section-title" id="searchLogicTitle"></div>
+
+
+            <div class="search-logic" style="margin-bottom:12px;">
+                <div class="search-logic-group required">
+                    <span class="group-title" id="requiredGroupTitle"><strong></strong><span class="req-star" aria-hidden="true">*</span></span>
+                    <label class="mode-item"><input type="checkbox" class="logic-chk required-chk" value="exact"></label>
+                    <label class="mode-item"><input type="checkbox" class="logic-chk required-chk" value="prefix"></label>
+                    <label class="mode-item"><input type="checkbox" class="logic-chk required-chk" value="suffix"></label>
+                    <label class="mode-item"><input type="checkbox" class="logic-chk required-chk" value="fuzzy"></label>
+                </div>
+                <div class="search-logic-opts" style="display:flex; gap:10px; align-items:center;">
+                    <span class="group-title" id="optionalGroupTitle"><strong></strong></span>
+                    <label class="mode-item" id="caseLabel"><input type="checkbox" id="caseSensitive"></label>
+                    <label class="mode-item" id="ignoreLabel"><input type="checkbox" id="ignoreSpaces"></label>
+                </div>
+            </div>
+
+
         </div>
         <div class="card">
             <div class="section-title" id="inputTitle"></div>
@@ -75,9 +88,51 @@
             </div>
         </div>
     </div>
+
+    <!-- 格式弹窗（紧凑）- 默认隐藏（已移动到 body 层，避免被卡片裁剪） -->
+    <div class="format-modal-backdrop" id="formatModalBackdrop" role="dialog" aria-modal="true" aria-hidden="true">
+        <div class="format-modal" role="document" tabindex="-1">
+            <div class="format-modal-header">
+                <strong id="formatModalTitle">文件格式筛选</strong>
+            </div>
+            <div class="format-modal-body">
+                <div class="format-panel small">
+                    <aside class="format-sidebar" id="formatCategories" aria-label="格式分类列表"></aside>
+                    <div class="format-main">
+                        <div class="format-main-header">
+                            <input type="search" id="formatSearch" placeholder="搜索格式 / 扩展名" aria-label="搜索格式">
+                            <div id="categoryControls" class="category-controls" aria-hidden="true"></div>
+                            <div class="format-actions">
+                                <button id="allBtn" onclick="toggleAll()"></button>
+                            </div>
+                        </div>
+                        <div class="format-grid-wrap" id="formatGridWrap" aria-live="polite"></div>
+                    </div>
+                </div>
+                <div class="custom-exts">
+                    <input type="text" id="customGroupName" placeholder="自定义文件类型" aria-label="Custom group name">
+                    <input type="text" id="customGroupExts" placeholder="自定义文件扩展名（无需加.）" aria-label="Extensions comma separated">
+                    <button id="addGroupBtn" type="button">添加组</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
     <div class="help-modal-backdrop" id="helpModalBackdrop" role="dialog" aria-modal="true" aria-hidden="true">
         <div class="help-modal" role="document" tabindex="-1">
             <div class="modal-body" id="helpModalBody"></div>
+        </div>
+    </div>
+
+    <!-- 内联编辑弹窗 -->
+    <div class="edit-modal-backdrop" id="editModalBackdrop" role="dialog" aria-modal="true" aria-hidden="true">
+        <div class="edit-modal" role="document" tabindex="-1">
+            <div class="edit-modal-header"><strong id="editModalTitle">编辑</strong></div>
+            <div class="edit-modal-body" id="editModalBody"></div>
+            <div class="edit-modal-actions">
+                <button id="editModalCancel" type="button">取消</button>
+                <button id="editModalSave" type="button">保存</button>
+            </div>
         </div>
     </div>
 
