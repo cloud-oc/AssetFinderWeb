@@ -26,8 +26,6 @@ Note: Separate filename and path with space or tab; paths may contain subdirecto
 4. **Set match options**: Choose one of the match modes (Exact / Prefix / Suffix / Keyword). Toggle **Case Sensitive** or **Ignore Spaces** if needed.
 5. **Search & Export**: Click **Search**. The progress bar shows indexing/searching progress. When finished, click **Export** to download a text file (format: `FileName.ext[TAB]relative/path`).
 
----
-
 ## 2) Match modes explained
 - **Exact**: filename (without extension) must be exactly equal.
 - **Prefix**: filename starts with the query.
@@ -36,19 +34,13 @@ Note: Separate filename and path with space or tab; paths may contain subdirecto
 
 Tip: turn on **Ignore Spaces** to improve matching when filenames contain/omit spaces.
 
----
-
 ## 3) Input/Output
 - Input: `FileName path/relative` per line.
 - Output: `FileName.ext[TAB]relative/path` per line.
 
----
-
 ## 4) Handling large projects
 - Indexing large projects may take some time; please be patient while the progress bar updates.
 - If the browser feels unresponsive, try importing smaller folders or wait until indexing completes.
-
----
 
 ## 5) Troubleshooting
 - If results are empty: ensure you selected at least one format or clicked **Select All**.
