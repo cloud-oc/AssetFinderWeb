@@ -54,33 +54,32 @@ body {
 .logo-title {
     font-size: 1.35rem; color: var(--primary); font-weight: 800; letter-spacing: 1px; display:flex; align-items:center; gap:12px;
 }
+.logo-icon { width:22px; height:22px; display:inline-block; margin-right:8px; vertical-align:middle; }
+.logo-icon img, .logo-icon svg { width:100%; height:100%; display:block; }
+.logo-icon { border-radius:4px; }
 .logo-sub { font-size: 0.62rem; color: #9a9a9a; margin-left:8px; }
 .header-right { display:flex; align-items:center; }
 .header-actions { display:flex; gap:14px; align-items:center; padding-left:12px; margin-left:14px; border-left: 1px solid var(--border); }
-.header-actions button { width:44px; height:44px; display:inline-flex; align-items:center; justify-content:center; border-radius: var(--radius-md); background:transparent; border:1px solid var(--border); color:var(--text-main); transition: background 0.14s, transform 0.08s, color 0.12s, box-shadow 0.12s; cursor:pointer; } 
-.header-actions button:hover { background: rgba(0,194,255,0.06); transform: translateY(-3px); box-shadow: 0 8px 22px rgba(0,194,255,0.06); } 
-.header-actions button:focus { outline: none; box-shadow: 0 0 0 3px rgba(0,194,255,0.10), 0 8px 22px rgba(0,0,0,0.4); border-color: rgba(0,194,255,0.14); }
+.header-actions button, .header-actions .github-btn { width:44px; height:44px; display:inline-flex; align-items:center; justify-content:center; border-radius: var(--radius-md); background:transparent; border:1px solid var(--border); color:var(--text-main); transition: background 0.14s, transform 0.08s, color 0.12s, box-shadow 0.12s; cursor:pointer; text-decoration:none; }
+.header-actions button:hover, .header-actions .github-btn:hover { background: rgba(0,194,255,0.06); transform: translateY(-3px); box-shadow: 0 8px 22px rgba(0,194,255,0.06); } 
+.header-actions button:focus, .header-actions .github-btn:focus { outline: none; box-shadow: 0 0 0 3px rgba(0,194,255,0.10), 0 8px 22px rgba(0,0,0,0.4); border-color: rgba(0,194,255,0.14); }
 /* 宽屏时左右的细微分隔 */
 .header-inner::after { content: ''; width: 100%; position: absolute; left: 50%; transform: translateX(-50%); height: 0; }
 .help-btn, .lang-switch-btn { position: static; box-shadow: none; }
-.lang-switch-btn { right: auto; top: auto; }
-@media (max-width: 900px) {
-    .header-inner { padding: 10px 14px; }
-}
-
-.lang-switch-btn { width: 40px; height: 40px; padding: 0; background: var(--primary); color: #000; border-radius: var(--radius-md); border: none; cursor: pointer; font-size: 0.95rem; transition: background 0.12s, transform 0.08s; display:inline-flex; align-items:center; justify-content:center; margin-left: 6px; } 
+/* 统一右上角按钮尺寸与对齐 */
+.header-actions .help-btn, .header-actions .lang-switch-btn { width:44px; height:44px; display:inline-flex; align-items:center; justify-content:center; padding:0; margin:0; border-radius: var(--radius-md); background: transparent; border: 1px solid var(--border); color:var(--text-main); }
+.lang-switch-btn { right: auto; top: auto; background: var(--primary); color: #000; border: none; margin-left: 6px; font-size: 0.95rem; transition: background 0.12s, transform 0.08s; }
 .lang-switch-btn .material-icons { font-size: 18px; line-height: 1; }
 .lang-switch-btn:hover { background: var(--accent); color: #fff; transform: translateY(-1px); }
 
 /* 帮助按钮（紧凑）- 在页头对齐 */
 .help-btn {
-    position: static; background: var(--glass); border: 1px solid var(--border);
-    color: var(--text-main); padding: 6px 8px; border-radius: var(--radius-sm); cursor: pointer; display: inline-flex; align-items:center; justify-content:center; box-shadow: 0 2px 8px rgba(0,0,0,0.28); margin-right: 6px;
+    background: var(--glass); color: var(--text-main); padding: 0; border-radius: var(--radius-md); cursor: pointer; display: inline-flex; align-items:center; justify-content:center; box-shadow: 0 2px 8px rgba(0,0,0,0.28); margin-right: 6px; border: 1px solid var(--border);
 } 
 .help-btn svg { display:block; }
 .help-btn:hover { background: rgba(0,194,255,0.04); }
 @media (max-width:520px) {
-    .header-actions button { width:38px; height:38px; }
+    .header-actions button, .header-actions .github-btn, .header-actions .help-btn, .header-actions .lang-switch-btn { width:38px; height:38px; }
     .logo-title { font-size: 1.05rem; }
     .logo-sub { display:none; }
     .header-inner { min-height:56px; }
@@ -246,14 +245,15 @@ body {
 .format-actions { display:flex; gap:8px; align-items:center; }
 .format-actions #allBtn { padding:6px 8px; border-radius:var(--radius-sm); background:#2b2b2d; color:var(--text-main); border:1px solid transparent; min-width:88px; font-weight:700; }
 .format-actions #allBtn.active { background:var(--primary); color:#000; }
-.btn-choose { padding:6px 10px; border-radius:var(--radius-sm); background:#2b2b2d; color:var(--text-main); border:1px solid transparent; cursor:pointer; font-weight:700; display:inline-flex; gap:8px; align-items:center; min-width:120px; justify-content:flex-start; position:relative; overflow:hidden; } 
+.btn-choose { padding:6px 10px; border-radius:var(--radius-sm); background:transparent; color:var(--text-main); border:1px solid var(--border); cursor:pointer; font-weight:700; display:inline-flex; gap:8px; align-items:center; min-width:120px; justify-content:flex-start; position:relative; overflow:hidden; transition: background 0.12s, color 0.12s, border-color 0.12s; } 
+.btn-choose:hover { background:#2b2b2d; }
+.btn-choose:focus { outline:none; box-shadow: 0 0 0 3px rgba(0,194,255,0.06); border-color: rgba(0,194,255,0.10); }
 .btn-choose i { font-size:14px; color:var(--primary); margin-right:8px; }
 .btn-choose .choose-label { display:inline-block; font-weight:700; white-space:nowrap; overflow:hidden; text-overflow:ellipsis; max-width:130px; }
 .btn-choose .choose-status { margin-left:auto; margin-right:8px; font-size:0.85rem; color:#9b9b9b; white-space:nowrap; }
 .btn-choose .choose-progress { position:absolute; left:0; right:0; bottom:0; height:4px; background: transparent; border-radius:0 0 var(--radius-sm) var(--radius-sm); overflow:hidden; }
 .btn-choose .choose-progress-fill { width:0%; height:100%; background: linear-gradient(90deg, var(--primary), #4fd8ff); transition: width 0.35s cubic-bezier(.2,.8,.2,1), opacity 0.4s ease; opacity:0; } 
-.btn-choose.busy { pointer-events:none; opacity:1; border-color: rgba(0,194,255,0.12); box-shadow: 0 8px 28px rgba(0,194,255,0.06); }
-.btn-choose.busy .choose-progress-fill { opacity:1; }
+.btn-choose.busy { pointer-events:none; opacity:1; border-color: rgba(0,194,255,0.12); box-shadow: 0 8px 28px rgba(0,194,255,0.06); background:#111; }
 .btn-choose.busy .choose-progress-fill { opacity:1; }
 .btn-choose.small { min-width:110px; padding:6px 8px; }
 .btn-format { padding:6px 10px; border-radius:var(--radius-sm); background:transparent; color:var(--text-main); border:1px solid var(--border); cursor:pointer; font-weight:700; display:inline-flex; gap:8px; align-items:center; }

@@ -46,6 +46,7 @@ const LANGUAGES = {
     },
     en: {
         helpTitle: "Help",
+        githubRepo: "Open GitHub repository",
         helpLoadLocal: "Load local help file",
         helpLocalFallback: file => `Unable to load local help file ${file}. Some browsers block fetch when using file://. You can use the VS Code Live Server extension, or run 'npx http-server' if Node.js is available, or click the button below to select and load the local help file.`,
         title: "Asset Finder Web",
@@ -94,7 +95,7 @@ let currentLang = 'zh';
 function setLang(lang) {
     currentLang = lang;
     const t = LANGUAGES[lang];
-    document.getElementById('titleText').innerHTML = t.title + '<span class="logo-sub">' + (t.description || '') + '</span>';
+    document.getElementById('titleText').innerHTML = '<img src="favicon.svg" class="logo-icon" alt="" aria-hidden="true">' + t.title + '<span class="logo-sub">' + (t.description || '') + '</span>';
     const filterEl = document.getElementById('filterTitle'); if (filterEl) filterEl.innerText = t.filter;
     const allBtn = document.getElementById('allBtn'); if (allBtn) allBtn.innerText = t.all; // will be toggled between All/None by updateAllBtnState
     const noneBtn = document.getElementById('noneBtn'); if (noneBtn) noneBtn.innerText = t.none;
@@ -165,6 +166,7 @@ function setLang(lang) {
     // 更新帮助按钮和弹窗内容
     const helpBtn = document.getElementById('helpBtn'); if (helpBtn) { helpBtn.title = t.helpTitle || 'Help'; helpBtn.setAttribute('aria-label', t.helpTitle || 'Help'); }
     const langBtn = document.getElementById('langSwitch'); if (langBtn) { const switchLabel = (t && t.switchToOther) ? t.switchToOther : ((lang === 'zh') ? '切换到英文' : 'Switch to Chinese'); langBtn.title = switchLabel; langBtn.setAttribute('aria-label', switchLabel); }
+    const githubBtn = document.getElementById('githubBtn'); if (githubBtn) { githubBtn.title = t.githubRepo || 'GitHub'; githubBtn.setAttribute('aria-label', t.githubRepo || 'GitHub repository'); }
     // help content will be rendered when user opens the Help dialog (showHelp)
 
     // 行号在语言切换或界面变更后需要刷新
