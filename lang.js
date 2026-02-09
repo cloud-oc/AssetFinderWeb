@@ -95,6 +95,8 @@ let currentLang = 'zh';
 function setLang(lang) {
     currentLang = lang;
     const t = LANGUAGES[lang];
+    document.documentElement.lang = lang === 'zh' ? 'zh-CN' : 'en';
+    document.title = t.title + (t.description ? ` - ${t.description}` : '');
     document.getElementById('titleText').innerHTML = '<img src="favicon.svg" class="logo-icon" alt="" aria-hidden="true">' + t.title + '<span class="logo-sub">' + (t.description || '') + '</span>';
     const filterEl = document.getElementById('filterTitle'); if (filterEl) filterEl.innerText = t.filter;
     const allBtn = document.getElementById('allBtn'); if (allBtn) allBtn.innerText = t.all; // will be toggled between All/None by updateAllBtnState

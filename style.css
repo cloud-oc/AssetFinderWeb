@@ -299,7 +299,13 @@ body {
 .code-wrapper { display:flex; align-items: stretch; flex:1 1 auto; background: transparent; height: 120px; }
 .gutter { width:36px; background:#0b0b0b; border-right: 1px solid #1b1b1b; color:#8b8b8b; padding:8px 6px; overflow: hidden; text-align: right; }
 .gutter .gutter-line { height:20px; line-height:20px; font-size:12px; }
-.code-wrapper textarea { width:100%; padding: 8px; font-family: 'Consolas', 'Courier New', monospace; overflow-x: auto; white-space: pre; height: 100%; flex: 0 0 auto; resize: none; overflow-y: auto; box-sizing: border-box; max-height: 100%; }
+.code-wrapper textarea { 
+    width:100%; padding: 8px; 
+    font-family: 'Consolas', 'Courier New', monospace; 
+    font-size: 14px; /* 明确字体大小 */
+    line-height: 20px; /* 明确行高 */
+    overflow-x: auto; white-space: pre; height: 100%; flex: 0 0 auto; resize: none; overflow-y: auto; box-sizing: border-box; max-height: 100%; 
+}
 /* 横向滚动时隐藏垂直换行 */
 .code-wrapper textarea { word-break: normal; overflow-wrap: normal; }
 

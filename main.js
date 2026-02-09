@@ -267,8 +267,18 @@ function addExtToBuiltIn(cat, raw) {
     initUI();
 }
 
-// 帮助：转义 HTML
-function escapeHtml(s) { if (!s) return ''; return String(s).replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;'); }
+// 辅助：转义 HTML (已在 main.js 中定义，此处仅用于 lang.js 内部或保持引用)
+// 统一使用 main.js 中的 escapeHtml
+
+window.initUI = initUI;
+window.syncUI = syncUI;
+window.toggleCat = toggleCat;
+window.toggleAll = toggleAll;
+window.handleImport = handleImport;
+window.handleSearch = handleSearch;
+window.download = download;
+window.updateProgress = updateProgress;
+window.escapeHtml = escapeHtml;
 
 // 内联编辑弹窗辅助
 function showEditModal({title, bodyHtml, onSave}) {
@@ -960,11 +970,14 @@ window.addEventListener('DOMContentLoaded', () => {
 
 // 注意：已禁用拖放导入；请使用隐藏的文件输入(`#dirInput`) 并调用 `handleImport()`。
 
-window.initUI = initUI;
-window.syncUI = syncUI;
-window.toggleCat = toggleCat;
-window.toggleAll = toggleAll;
-window.handleImport = handleImport;
-window.handleSearch = handleSearch;
-window.download = download;
-window.updateProgress = updateProgress;
+// 已在 main.js 之前或其他地方定义，此处保持引用或通过全局访问。
+// 若要在 main.js 中保留常用工具函数，建议只保留一个版本。
+function escapeHtml(s) { 
+    if (!s) return ''; 
+    return String(s)
+        .replace(/&/g,'&amp;')
+        .replace(/</g,'&lt;')
+        .replace(/>/g,'&gt;')
+        .replace(/"/g,'&quot;')
+        .replace(/'/g,'&#039;'); 
+}
